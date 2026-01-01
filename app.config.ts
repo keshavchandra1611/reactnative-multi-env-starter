@@ -90,11 +90,29 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       },
       edgeToEdgeEnabled: true,
       predictiveBackGestureEnabled: false,
+      jsEngine: "hermes", // enable Hermes
     },
-    
+
     web: {
       favicon: favicons[ENV],
     },
+
+    // ✅ Plugins for Proguard / resource shrinking
+    plugins: [
+      [
+        "expo-build-properties",
+        {
+          android: {
+            enableProguardInReleaseBuilds: true,
+            shrinkResources: true, // remove unused resources
+            extraProguardRules: `
+              -keep class com.facebook.react.** { *; }
+              -keep class com.facebook.hermes.** { *; }
+            `,
+          },
+        },
+      ],
+    ],
 
     extra: {
       env: ENV,

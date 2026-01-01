@@ -6,10 +6,15 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:dev": "eas build -p android --profile development --local --clear-cache",
+    "build:preview": "eas build -p android --profile preview --local --clear-cache",
+    "build:production": "eas build -p android --profile production_external --local --clear-cache",
+    "build:ext_production": "eas build -p android --profile production_external --local --clear-cache"
   },
   "dependencies": {
     "expo": "~54.0.30",
+    "expo-dev-client": "~6.0.20",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
     "react-native": "0.81.5"

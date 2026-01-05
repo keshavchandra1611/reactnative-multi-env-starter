@@ -8,15 +8,15 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   const baseAssetPath = `./assets/${ENV}`; // <--- dynamic base folder
 
   const appIds: Record<AppEnv, string> = {
-    dev: "com.keshav1611.myapp.dev",
-    qa: "com.keshav1611.myapp.qa",
-    prod: "com.keshav1611.myapp",
+    dev: "com.leapclicker.ap.dev",
+    qa: "com.leapclicker.ap.qa",
+    prod: "com.leapclicker.ap",
   };
 
   const appNames: Record<AppEnv, string> = {
-    dev: "MyApp Dev",
-    qa: "MyApp QA",
-    prod: "MyApp",
+    dev: "Leap Clicker Dev",
+    qa: "Leap Clicker QA",
+    prod: "Leap Clicker",
   };
 
   const icons: Record<AppEnv, string> = {
@@ -44,9 +44,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   };
 
   const splashImages: Record<AppEnv, string> = {
-    dev: `${baseAssetPath}/splash-icon.png`,
-    qa: `${baseAssetPath}/splash-icon.png`,
-    prod: `${baseAssetPath}/splash-icon.png`,
+    dev: `${baseAssetPath}/splash-screen.png`,
+    qa: `${baseAssetPath}/splash-screen.png`,
+    prod: `${baseAssetPath}/splash-screen.png`,
   };
 
   const favicons: Record<AppEnv, string> = {
@@ -60,12 +60,12 @@ export default ({ config }: ConfigContext): ExpoConfig => {
 
     // App identity
     name: appNames[ENV],
-    slug: "myapp",
-    owner: "keshav1611",
+    slug: "new-leap-clicker-ap",
+    owner: "physicswallah",
     version: "1.0.0",
 
     // UI / behavior
-    orientation: "portrait",
+    orientation: "landscape",
     userInterfaceStyle: "light",
     newArchEnabled: true,
 
@@ -84,6 +84,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     android: {
       ...config.android,
       package: appIds[ENV],
+      // @ts-expect-error — Expo supports this, typings are outdated
+      language: "java",
       adaptiveIcon: {
         foregroundImage: adaptiveIcons[ENV].foreground,
         backgroundColor: adaptiveIcons[ENV].background,
@@ -117,7 +119,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     extra: {
       env: ENV,
       eas: {
-        projectId: "5f12c90a-bca1-4bfb-9d32-daf9990a63ba",
+        projectId: "b6a52104-b34a-4cc1-bad0-1a5814fd1440",
       },
     },
   };

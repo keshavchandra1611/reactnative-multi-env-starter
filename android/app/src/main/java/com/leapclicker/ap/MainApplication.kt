@@ -1,4 +1,4 @@
-package com.leapclicker.ap.dev
+package com.leapclicker.ap
 
 import android.app.Application
 import android.content.res.Configuration

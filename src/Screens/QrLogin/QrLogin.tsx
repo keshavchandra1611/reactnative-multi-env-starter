@@ -38,6 +38,7 @@ type StatusType = 'generating' | 'waiting' | 'authorized' | 'error';
 const QrLogin: React.FC = () => {
     const screenSizes = getSizeConfig();
     const [qrPayload, setQrPayload] = useState<string | null>(null);
+    const [resultPayload, setResultPayload] = useState<string | null>(null);
     const [sessionId, setSessionId] = useState<string | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -90,6 +91,10 @@ const QrLogin: React.FC = () => {
                 }
             }, expiryTime);
 
+            if (result) {
+                setResultPayload(JSON.stringify(result))
+            }
+
         } catch (err) {
             setLoading(false);
             setStatus('error');
@@ -98,7 +103,7 @@ const QrLogin: React.FC = () => {
     };
 
     const startPolling = (sessionId: string): void => {
-        console.log(sessionId, "sessionId")
+        // console.log(sessionId, "sessionId")
 
         pollingIntervalRef.current = setInterval(async () => {
             try {
@@ -133,8 +138,8 @@ const QrLogin: React.FC = () => {
     };
 
     const handleSuccessfulLogin = (authToken: string, teacher: Teacher): void => {
-        console.log('Auth Token:', authToken);
-        console.log('Teacher Data:', teacher);
+        // console.log('Auth Token:', authToken);
+        // console.log('Teacher Data:', teacher);
         mstorage.set("selectedClass", teacher.class);
         mstorage.set("teacher", teacher.name)
         Alert.alert(
@@ -155,7 +160,7 @@ const QrLogin: React.FC = () => {
             ]
         );
     };
-    console.log(qrPayload, "qrPayload")
+    // console.log(qrPayload, "qrPayload")
     const renderContent = () => {
         if (loading || status === 'generating') {
             return (
@@ -203,12 +208,14 @@ const QrLogin: React.FC = () => {
             </Text> */}
 
                         <View style={styles.qrContainer}>
-                            <QRCode
-                                value={sessionId}
-                                size={120 * screenSizes.widthScale}
-                                backgroundColor="white"
-                                color="black"
-                            />
+                            {resultPayload &&
+                                <QRCode
+                                    value={resultPayload}
+                                    size={120 * screenSizes.widthScale}
+                                    backgroundColor="white"
+                                    color="black"
+                                />
+                            }
                         </View>
 
                         <View style={styles.statusContainer}>

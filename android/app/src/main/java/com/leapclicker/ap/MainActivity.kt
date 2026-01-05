@@ -1,4 +1,4 @@
-package com.leapclicker.ap.dev
+package com.leapclicker.ap
 
 import android.os.Build
 import android.os.Bundle
